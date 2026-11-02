@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.pyrepl_history
+# VS Code / Jupyter
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+.vscode/
+# Datos potencialmente privados, generados o no autorizados
+/data/raw/*
+!/data/raw/.gitkeep
+/data/processed/*
+!/data/processed/.gitkeep
+*.xlsx
+*.xls
+# Bases y exportaciones fuera de data se revisan antes de publicar
+*.csv
+*.parquet
+# artefactos grandes o transitorios
+*.log
+.DS_Store
+Thumbs.db
