@@ -28,8 +28,6 @@ Revisar las bases, actualizar importes mediante INPC, analizar emisión y sinies
 ├── notebooks/                # análisis reproducibles
 ├── funciones_reservas.py      # funciones reutilizables
 ├── tests/                    # pruebas con datos sintéticos
-├── reports/figures/          # gráficas exportadas localmente
-├── reports/tables/           # tablas exportadas localmente
 ├── METODOLOGIA.md
 └── AGENTS.md
 ```
