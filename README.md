@@ -26,7 +26,7 @@ Revisar las bases, actualizar importes mediante INPC, analizar emisión y sinies
 ├── data/raw/                 # Excel locales
 ├── data/processed/           # snapshots locales
 ├── notebooks/                # análisis reproducibles
-├── src/funciones_reservas.py # funciones reutilizables
+├── funciones_reservas.py      # funciones reutilizables
 ├── tests/                    # pruebas con datos sintéticos
 ├── reports/figures/          # gráficas exportadas localmente
 ├── reports/tables/           # tablas exportadas localmente

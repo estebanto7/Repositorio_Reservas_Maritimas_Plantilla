@@ -24,4 +24,5 @@ def test_notebooks_no_dependen_de_variables_de_otro_notebook():
     for nombre in NOTEBOOKS:
         texto = (root / "notebooks" / nombre).read_text(encoding="utf-8")
         assert "ADA RESERVAS.ipynb" not in texto
-        assert "from funciones_reservas import" in texto
+        assert "cargar_excel" not in texto
+        assert '"/src/"' not in texto

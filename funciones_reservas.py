@@ -12,37 +12,29 @@ import numpy as np
 import pandas as pd
 
 
-# Carga, validación y limpieza
-def cargar_excel(ruta: str | Path, hoja: str | int = 0) -> pd.DataFrame:
-    """Lee una hoja de Excel y muestra un error claro si el archivo falta."""
-    ruta = Path(ruta)
-    if not ruta.exists():
-        raise FileNotFoundError(f"No se encontró la base original: {ruta}")
-    return pd.read_excel(ruta, sheet_name=hoja)
+def resumen_calidad(df):
 
+    resumen = pd.DataFrame({
+        "tipo": df.dtypes,
+        "nulos": df.isna().sum(),
+        "unicos": df.nunique()
+    })
 
-def resumen_calidad(df: pd.DataFrame) -> pd.DataFrame:
-    """Resume tipos, nulos, ceros, negativos, únicos y duplicados por columna."""
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("df debe ser un DataFrame de pandas.")
-    out = pd.DataFrame(index=df.columns)
-    out.index.name = "variable"
-    out["tipo"] = df.dtypes.astype(str)
-    out["nulos"] = df.isna().sum()
-    out["unicos"] = df.nunique(dropna=True)
-    out["ceros"] = [
-        int((df[col] == 0).sum())
+    resumen["ceros"] = [
+        (df[col] == 0).sum()
         if pd.api.types.is_numeric_dtype(df[col])
-        else pd.NA
-        for col in df
+        else "—"
+        for col in df.columns
     ]
-    out["negativos"] = [
-        int((df[col] < 0).sum())
+
+    resumen["negativos"] = [
+        (df[col] < 0).sum()
         if pd.api.types.is_numeric_dtype(df[col])
-        else pd.NA
-        for col in df
+        else "—"
+        for col in df.columns
     ]
-    return out
+
+    return resumen
 
 
 def normalizar_espacios(df: pd.DataFrame, columnas: Iterable[str]) -> pd.DataFrame:
@@ -307,23 +299,3 @@ def participacion_por_categoria(
     return agregado.div(total, axis=0).mul(100)
 
 
-def exportar_tabla(
-    df: pd.DataFrame, ruta: str | Path, *, indice: bool = False
-) -> Path:
-    """Exporta una tabla a CSV, creando la carpeta de destino."""
-    ruta = Path(ruta)
-    ruta.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(ruta, index=indice, encoding="utf-8-sig")
-    return ruta
-
-
-def exportar_figura(figura, ruta: str | Path) -> Path:
-    """Exporta una figura Plotly a HTML y deja PNG como intento explícito."""
-    ruta = Path(ruta)
-    ruta.parent.mkdir(parents=True, exist_ok=True)
-    figura.write_html(ruta.with_suffix(".html"))
-    try:
-        figura.write_image(ruta.with_suffix(".png"))
-    except (ImportError, ValueError, OSError) as exc:
-        print(f"No se pudo exportar PNG ({exc}); se conservó el HTML interactivo.")
-    return ruta.with_suffix(".html")
