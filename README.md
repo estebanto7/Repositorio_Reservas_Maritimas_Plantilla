@@ -10,8 +10,7 @@ Revisar las bases, actualizar importes mediante INPC, analizar emisión y sinies
 
 - `data/raw/2026 BASE RESERVAS.xlsx`: hojas `EMISION` y `SINIESTRALIDAD`.
 - `data/raw/EMISION 2025.xlsx`: pólizas 2025 con inicio y fin de vigencia.
-- `data/processed/`: snapshots Parquet generados localmente. Los originales y snapshots están excluidos de Git hasta confirmar autorización de publicación.
-
+- `data/processed/`: snapshots Parquet generados localmente.
 ## Notebooks
 
 1. [00_revision_datos.ipynb](notebooks/00_revision_datos.ipynb): inspección, calidad y categorías.
@@ -24,8 +23,8 @@ Revisar las bases, actualizar importes mediante INPC, analizar emisión y sinies
 
 ```text
 .
-├── data/raw/                 # Excel locales, no publicados
-├── data/processed/           # snapshots locales, no publicados
+├── data/raw/                 # Excel locales
+├── data/processed/           # snapshots locales
 ├── notebooks/                # análisis reproducibles
 ├── src/funciones_reservas.py # funciones reutilizables
 ├── tests/                    # pruebas con datos sintéticos
@@ -46,10 +45,4 @@ python -m pip install -r requirements.txt
 python -m pytest -q
 ```
 
-Después abre los notebooks en VS Code y ejecútalos de forma independiente. El notebook 01 requiere una serie mensual de INPC y, si se descarga desde Banxico, la configuración correspondiente de `banxicolab`. Si falta, muestra el requisito y no inventa snapshots.
-
-## Estado
-
-- Revisión, actualización monetaria y análisis de mercado: desarrollados a partir del notebook original.
-- Factores de siniestralidad, conglomerados, RRC y SONR: pendientes de confirmar definiciones y datos.
-- Las interpretaciones originales se conservan; las explicaciones externas se presentan como hipótesis no verificadas.
+Después abre los notebooks en VS Code y ejecútalos de forma independiente. El notebook 01 requiere una serie mensual de INPC y, si se descarga desde Banxico, la configuración correspondiente de [`banxicolab`](https://github.com/AnaJZP/banxicolab) se tiene que configurar el token y generar uno personal en (https://www.banxico.org.mx/SieAPIRest/service/v1/token). Si falta, muestra el requisito y no inventa snapshots. 
