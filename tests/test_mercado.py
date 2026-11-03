@@ -1,7 +1,13 @@
 import pandas as pd
 import pytest
-from reservas_maritimas.calidad import normalizar_espacios, resumen_calidad
-from reservas_maritimas.mercado import resumen_emision_anual, participacion_por_categoria
+
+from funciones_reservas import (
+    normalizar_categorias,
+    normalizar_espacios,
+    participacion_por_categoria,
+    resumen_calidad,
+    resumen_emision_anual,
+)
 
 
 def test_limpieza_espacios_sin_mutar_original():
@@ -9,6 +15,13 @@ def test_limpieza_espacios_sin_mutar_original():
     out = normalizar_espacios(df, ["tipo_embarcacion"])
     assert out["tipo_embarcacion"].nunique() == 1
     assert df.iloc[0, 0] != out.iloc[0, 0]
+
+
+def test_normalizacion_de_categorias_conserva_faltantes():
+    df = pd.DataFrame({"tipo": [" Buque   Tanque ", None]})
+    out = normalizar_categorias(df, ["tipo"])
+    assert out["tipo"].tolist() == ["buque tanque", pd.NA]
+    assert pd.isna(df.loc[1, "tipo"])
 
 
 def test_sumar_con_negativos():

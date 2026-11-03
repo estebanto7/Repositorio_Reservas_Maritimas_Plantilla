@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
-from reservas_maritimas.inpc import ajustar_inpc
+
+from funciones_reservas import ajustar_inpc
 
 
 def test_inpc_anual_diciembre_y_signo():
@@ -22,3 +23,11 @@ def test_inpc_fecha_mensual():
     df = pd.DataFrame({"fecha": ["2025-01", "2025-12"], "importe": [100, 100]})
     r = ajustar_inpc(df, "importe", "fecha", "2025-12", serie, frecuencia="mensual")
     assert r["importe_ajustada"].tolist() == pytest.approx([120, 100])
+
+
+def test_inpc_conserva_filas_y_montos_faltantes():
+    serie = pd.Series([100.0, 110.0], index=pd.to_datetime(["2024-12-01", "2025-12-01"]))
+    df = pd.DataFrame({"año": [2024, 2024], "prima": [100.0, None]})
+    r = ajustar_inpc(df, "prima", "año", 2025, serie)
+    assert len(r) == len(df)
+    assert pd.isna(r.loc[1, "prima_ajustada"])

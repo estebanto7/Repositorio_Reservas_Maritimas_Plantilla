@@ -19,6 +19,10 @@ venv/
 !/data/raw/.gitkeep
 /data/processed/*
 !/data/processed/.gitkeep
+reports/figures/*
+!reports/figures/.gitkeep
+reports/tables/*
+!reports/tables/.gitkeep
 *.xlsx
 *.xls
 # Bases y exportaciones fuera de data se revisan antes de publicar
