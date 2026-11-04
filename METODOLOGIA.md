@@ -71,25 +71,16 @@ Explicar los prinicpales resultados de cada uno de los seis apartados anteriores
 
 
 
-## Siniestralidad y conglomerados
-
-1. ¿Los ceros en los desarrollos de siniestros representan ausencia de pagos o también periodos que todavía no se han observado?
-
-2. ¿Qué significado tienen los montos negativos tanto en las primas como los siniestros?¿Qué tratamiento debemos dar a las primas emitidas negativas y a los factores de siniestralidad extremadamente elevados? ¿Debemos conservarlos en el análisis principal o realizar algún ajuste?
-
-3. Antes de la pregunta presentar que se hizo en 3.1 y porque 
-- ¿Podemos definir nuestros segmentos mediante la combinación de tipo_embarcacion y uso? Consideramos que utilizar ambas variables permite distinguir mejor los perfiles de riesgo que usar solamente una.
-- ¿Es correcto utilizar 2015–2022 para el análisis de conglomerados, porque son los ocho años que pueden tener los cuatro desarrollos observados, y conservar 2015–2025 para el análisis descriptivo?
-- Identificamos 132 segmentos y seleccionamos 34 con primas positivas durante todos los años de 2015–2022, que representan el 89.76% de las primas del periodo. ¿Es adecuado realizar el análisis formal únicamente con estos segmentos y estudiar los demás por separado?
-
 4. Tenemos siniestros registrados bajo la categoría no disponible, pero no encontramos primas correspondientes. ¿Cómo debemos tratar estos montos al calcular la siniestralidad por segmento?
+
+quitar
 
 5. Cuando un segmento tiene prima emitida, pero no registra siniestros durante un año, ¿podemos asignarle un factor de siniestralidad igual a cero?
 
-## Actualización por INPC
-
-6. Presentar como se hizo el ajuste y preguntar si es correcto (es asi o promedio anual?)
+1
 
 ## Reservas Actuariales
 
 7. Para calcular la RRC mediante los métodos exacto, veinticuatroavos y estatutario, ¿debemos utilizar la prima emitida, la retenida o una prima ajustada por gastos y comisiones?
+
+no tenemos reaseguro (emititada) siempre 
