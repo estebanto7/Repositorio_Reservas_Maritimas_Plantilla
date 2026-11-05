@@ -14,12 +14,8 @@ venv/
 !.env.example
 .ipynb_checkpoints/
 .vscode/
-# Datos potencialmente privados, generados o no autorizados
-*.xlsx
-*.xls
 # Bases y exportaciones fuera de data se revisan antes de publicar
 *.csv
-*.parquet
 # artefactos grandes o transitorios
 *.log
 .DS_Store
