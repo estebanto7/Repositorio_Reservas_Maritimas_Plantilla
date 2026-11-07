@@ -11,6 +11,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from sklearn.cluster import KMeans, AgglomerativeClustering
+from kmedoids import KMedoids
+
+from sklearn.metrics import silhouette_score, calinski_harabasz_score
+
 
 def resumen_calidad(df):
 
@@ -299,3 +304,80 @@ def participacion_por_categoria(
     return agregado.div(total, axis=0).mul(100)
 
 
+def evaluar_modelo(X, metodo, k_max):
+    """
+    Evalúa un método de clustering para k = 2 hasta k_max.
+
+    Retorna un DataFrame con:
+    - Silhouette
+    - Calinski-Harabasz
+    - WCSS
+    - Tamaños de los grupos
+    - Tamaño del grupo más pequeño
+
+    Parameters
+    ----------
+    metodo : str
+        Método de clustering a evaluar. Puede ser "Ward", "Liga completa", "K-means" o "K-medoids".
+    """
+
+    X = np.asarray(X)
+    resultados = []
+
+    for k in range(2, k_max + 1):
+
+        # Seleccionar modelo
+        modelos = {
+            "Ward": AgglomerativeClustering(
+                n_clusters=k, linkage="ward"
+            ),
+
+            "Liga completa": AgglomerativeClustering(
+                n_clusters=k, linkage="complete"
+            ),
+
+            "K-means": KMeans(
+                n_clusters=k, random_state=42, n_init=20
+            ),
+
+            "K-medoids": KMedoids(
+                n_clusters=k, metric="euclidean",
+                method="pam", random_state=42
+            )
+        }
+
+        if metodo not in modelos:
+            raise ValueError(f"Método no válido: {metodo}")
+
+        # Ajustar modelo para este k
+        modelo = modelos[metodo]
+        etiquetas = modelo.fit_predict(X)
+
+        # Métricas
+        silhouette = silhouette_score(X, etiquetas)
+        calinski = calinski_harabasz_score(X, etiquetas)
+
+        # WCSS: suma de cuadrados respecto a los centroides
+        wcss = 0
+
+        for grupo in np.unique(etiquetas):
+            puntos = X[etiquetas == grupo]
+            centroide = puntos.mean(axis=0)
+
+            wcss += ((puntos - centroide) ** 2).sum()
+
+        # Tamaño de los grupos
+        tamanos = np.bincount(etiquetas)
+        tamanos = np.sort(tamanos)[::-1]
+
+        # Guardar resultados
+        resultados.append({
+            "Número de clusters": k,
+            "Silhouette": silhouette,
+            "Calinski-Harabasz": calinski,
+            "WCSS": wcss,
+            "Tamaño de grupos": tamanos.tolist(),
+            "Grupo mínimo": tamanos.min()
+        })
+
+    return pd.DataFrame(resultados).round(3)

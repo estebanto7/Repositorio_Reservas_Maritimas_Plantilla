@@ -69,18 +69,43 @@ de Conglomerados)**
 
 Explicar los prinicpales resultados de cada uno de los seis apartados anteriores. 
 
+# Metodología de Clusters
 
+## Antes de comenzar: Decisiones metodológicas
+- Definir las características que utilizaremos.
+- Establecer cómo comparar las variables entre ventanas.
+- Definir los criterios para evaluar la estabilidad.
 
-4. Tenemos siniestros registrados bajo la categoría no disponible, pero no encontramos primas correspondientes. ¿Cómo debemos tratar estos montos al calcular la siniestralidad por segmento?
+## Etapa 1: Construcción de nuevas variables
+- Siniestralidad acumulada.
+- Variabilidad temporal.
+- Recurrencia de siniestralidad elevada.
+- Otras características, si aportan información relevante.
 
-quitar
+## Etapa 2: Construcción de conglomerados
+- Analizar distribuciones, escalas y correlaciones de las nuevas características.
+- Aplicar y comparar los métodos de agrupación.
+- Buscar grupos homogéneos e interpretables, no necesariamente estables todavía.
 
-5. Cuando un segmento tiene prima emitida, pero no registra siniestros durante un año, ¿podemos asignarle un factor de siniestralidad igual a cero?
+## Etapa 3: Estabilidad temporal
+- Construir ventanas móviles de cuatro años.
+- Calcular las mismas características y repetir el agrupamiento en cada ventana.
+- Evaluar ARI, cambios de pertenencia y permanencia de los segmentos.
+- Comparar también los periodos independientes 2015–2018 y 2019–2022.
 
-1
+## Etapa 4: Confiabilidad actuarial
+- Identificar segmentos con primas pequeñas, experiencia limitada o pérdidas extraordinarias.
+- Evaluar cómo influyen los factores extremos en los conglomerados.
+- Verificar si contamos con información suficiente para aplicar credibilidad actuarial.
+- Considerar Bühlmann–Straub como análisis complementario de sensibilidad, si se justifican sus supuestos.
 
-## Reservas Actuariales
+## Etapa 5: Selección final de conglomerados
 
-7. Para calcular la RRC mediante los métodos exacto, veinticuatroavos y estatutario, ¿debemos utilizar la prima emitida, la retenida o una prima ajustada por gastos y comisiones?
+**Criterios de evaluación:**
+- Homogeneidad.
+- Interpretabilidad.
+- Robustez.
+- Estabilidad temporal.
+- Confiabilidad actuarial.
 
-no tenemos reaseguro (emititada) siempre 
+**Objetivo:** seleccionar y justificar los conglomerados más adecuados, reconociendo sus limitaciones.
